@@ -1,7 +1,10 @@
 function formidable_csv_download() {
-    var cells = ['A1', 'C8', 'B3']
+    var cells = []
+    for (var cell of document.querySelectorAll('[data-csv]'))
+    cells.push(cell.getAttribute('data-csv'))
     cells.sort()
     cells.reverse()
+
     var last_cell = cells[0]
     , last_col = last_cell.charAt(0)
     , last_row = parseInt(last_cell.replace(last_col, '')) - 1
@@ -14,7 +17,17 @@ function formidable_csv_download() {
         tr = ''
         for (var col = 0; col <= last_col; col++) {
             var colChar = String.fromCharCode(97+col).toUpperCase()
-            tr += `<td>${colChar}${row + 1}</td>`
+            , element = document.querySelector(`[data-csv="${colChar}${row + 1}"]`)
+            , content = '&nbsp;'
+            if (element) switch (element.tagName) {
+                case 'LABEL':
+                    content = element.childNodes[0].nodeValue
+                    break
+                case 'INPUT':
+                    content = element.value
+                    break
+            }
+            tr += `<td>${content}</td>`
         }
         tbody += `<tr>${tr}</tr>`
     }
