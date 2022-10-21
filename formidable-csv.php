@@ -30,6 +30,6 @@ add_shortcode('formidable-csv-download-button', function () {
     wp_register_script('formidable-csv-download', plugin_dir_url(__FILE__) . 'formidable-csv-download.js');
     wp_enqueue_script('formidable-csv-download');
     return
-        '<div id="formidable-csv-download"></div>'
+        '<div id="formidable-csv-download" style="display:none"></div>'
         . '<button onclick="formidable_csv_download(); return false;"> Download CSV </button>';
 });
