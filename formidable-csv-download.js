@@ -1,6 +1,8 @@
 function formidable_csv_download() {
-    var separator = ';'
+    var filename = 'formidable-csv-download-' + new Date().toLocaleDateString() + '.csv'
+    separator = ';'
     cells = []
+
     for (var cell of document.querySelectorAll('[data-csv]'))
         cells.push(cell.getAttribute('data-csv'))
     cells.sort()
@@ -25,19 +27,24 @@ function formidable_csv_download() {
                     content = element.childNodes[0].nodeValue
                     break
                 case 'INPUT':
-                    content = element.value
-                    break
+                    switch (element.getAttribute('type')) {
+                        case 'radio':
+                            var checked = document.querySelector(`[data-csv="C2"]:checked`)
+                            content = checked ? checked.nextSibling.data.replace('\n', '') : ''
+                            break
+                        default:
+                            content = element.value
+                            break
+                    }
             }
             tr += `<td>${content}</td>`
         }
         tbody += `<tr>${tr}</tr>`
     }
+    document.querySelector('#formidable-csv-download').innerHTML = tbody
 
-    var table = `<table>${tbody}</table>`
-    document.querySelector('#formidable-csv-download').innerHTML = table
-
-    var rows = document.querySelectorAll('#formidable-csv-download table tr')
-    var csv = []
+    var rows = document.querySelectorAll('#formidable-csv-download tr')
+        , csv = []
     for (var i = 0; i < rows.length; i++) {
         var row = [], cols = rows[i].querySelectorAll('td, th')
         for (var j = 0; j < cols.length; j++) {
@@ -49,7 +56,6 @@ function formidable_csv_download() {
     }
     var csv_string = csv.join('\n')
 
-    var filename = 'formidable-csv-download-' + new Date().toLocaleDateString() + '.csv'
     var link = document.createElement('a')
     link.style.display = 'none'
     link.setAttribute('target', '_blank')
