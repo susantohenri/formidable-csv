@@ -1,10 +1,9 @@
 function formidable_csv_download() {
     var filename = 'formidable-csv-download-' + new Date().toLocaleDateString() + '.csv'
-    separator = ';'
-    cells = []
+    , cells = []
 
-    for (var cell of document.querySelectorAll('[data-csv]'))
-        cells.push(cell.getAttribute('data-csv'))
+    for (var cell of document.querySelectorAll(`[${FORMIDABLE_CSV.ATTRIBUTE}]`))
+        cells.push(cell.getAttribute(`${FORMIDABLE_CSV.ATTRIBUTE}`))
     cells.sort()
     cells.reverse()
 
@@ -20,7 +19,7 @@ function formidable_csv_download() {
         tr = ''
         for (var col = 0; col <= last_col; col++) {
             var colChar = String.fromCharCode(97 + col).toUpperCase()
-                , element = document.querySelector(`[data-csv="${colChar}${row + 1}"]`)
+                , element = document.querySelector(`[${FORMIDABLE_CSV.ATTRIBUTE}="${colChar}${row + 1}"]`)
                 , content = ''
             if (element) switch (element.tagName) {
                 case 'LABEL':
@@ -29,7 +28,7 @@ function formidable_csv_download() {
                 case 'INPUT':
                     switch (element.getAttribute('type')) {
                         case 'radio':
-                            var checked = document.querySelector(`[data-csv="C2"]:checked`)
+                            var checked = document.querySelector(`[${FORMIDABLE_CSV.ATTRIBUTE}="${colChar}${row + 1}"]:checked`)
                             content = checked ? checked.nextSibling.data.replace('\n', '') : ''
                             break
                         default:
@@ -52,7 +51,7 @@ function formidable_csv_download() {
             data = data.replace(/"/g, '""')
             row.push('"' + data + '"')
         }
-        csv.push(row.join(separator))
+        csv.push(row.join(FORMIDABLE_CSV.DELIMITER))
     }
     var csv_string = csv.join('\n')
 
