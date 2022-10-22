@@ -37,7 +37,10 @@ add_shortcode('formidable-csv-upload-button', function () {
     return '<input type="file" id="formidable-csv-upload-button">';
 });
 
-add_shortcode('formidable-csv-download-button', function () {
+add_shortcode('formidable-csv-download-button', function ($atts) {
+    $atts = shortcode_atts(['file-name' => 'Formidable CSV Default File Name.csv'], $atts);
+    $atts['file-name'] .= '.csv' !== substr($atts['file-name'], -4) ? '.csv' : '';
+
     wp_register_script('formidable-csv-download', plugin_dir_url(__FILE__) . 'formidable-csv-download.js');
     wp_enqueue_script('formidable-csv-download');
     wp_localize_script(
@@ -46,6 +49,7 @@ add_shortcode('formidable-csv-download-button', function () {
         array(
             'DELIMITER' => FORMIDABLE_CSV_DELIMITER
             , 'ATTRIBUTE' => FORMIDABLE_CSV_ATTRIBUTE
+            , 'FILE_NAME' => $atts['file-name']
         )
     );
     return

@@ -1,6 +1,5 @@
 function formidable_csv_download() {
-    var filename = 'formidable-csv-download-' + new Date().toLocaleDateString() + '.csv'
-    , cells = []
+    var cells = []
 
     for (var cell of document.querySelectorAll(`[${FORMIDABLE_CSV.ATTRIBUTE}]`))
         cells.push(cell.getAttribute(`${FORMIDABLE_CSV.ATTRIBUTE}`))
@@ -60,7 +59,7 @@ function formidable_csv_download() {
     link.style.display = 'none'
     link.setAttribute('target', '_blank')
     link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv_string))
-    link.setAttribute('download', filename)
+    link.setAttribute('download', FORMIDABLE_CSV.FILE_NAME)
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
