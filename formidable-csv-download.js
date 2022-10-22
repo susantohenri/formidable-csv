@@ -25,6 +25,9 @@ function formidable_csv_download() {
                 case 'LABEL':
                     content = element.childNodes[0].nodeValue
                     break
+                case 'SELECT':
+                    content = element.value
+                    break
                 case 'INPUT':
                     switch (element.getAttribute('type')) {
                         case 'radio':

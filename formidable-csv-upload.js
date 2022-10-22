@@ -23,7 +23,9 @@ document.getElementById('formidable-csv-upload-button').addEventListener('change
                 element = document.querySelector(`[${FORMIDABLE_CSV.ATTRIBUTE}="${colChar}${rowNum}"]`)
 
                 if (element) switch (element.tagName) {
-                    case 'LABEL': break
+					case 'SELECT': 
+						element.value = content
+						break
                     case 'INPUT':
                         switch (element.getAttribute('type')) {
                             case 'radio':
