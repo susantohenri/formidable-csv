@@ -22,6 +22,7 @@ function formidable_csv_download() {
                 , element = document.querySelector(`[${FORMIDABLE_CSV.ATTRIBUTE}="${colChar}${row + 1}"]`)
                 , content = ''
             if (element) switch (element.tagName) {
+                case 'DIV':
                 case 'LABEL':
                     content = element.childNodes[0].nodeValue
                     break
