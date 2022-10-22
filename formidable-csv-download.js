@@ -1,14 +1,17 @@
 function formidable_csv_download() {
     var cells = []
-
     for (var cell of document.querySelectorAll(`[${FORMIDABLE_CSV.ATTRIBUTE}]`))
         cells.push(cell.getAttribute(`${FORMIDABLE_CSV.ATTRIBUTE}`))
-    cells.sort()
-    cells.reverse()
 
-    var last_cell = cells[0]
-        , last_col = last_cell.charAt(0)
-        , last_row = parseInt(last_cell.replace(last_col, '')) - 1
+    var getCols = cells.map(cell => { return cell.charAt(0) })
+    getCols.sort()
+    getCols.reverse()
+
+    var getRows = cells.map(cell => { return parseInt(cell.replace(cell.charAt(0), '')) })
+    getRows.sort((a, b) => { return b - a })
+
+    var last_col = getCols[0]
+        , last_row = getRows[0]
         , tbody = ''
         , tr = ''
 
