@@ -30,7 +30,7 @@ function formidable_csv_download() {
                     switch (element.getAttribute('type')) {
                         case 'radio':
                             var checked = document.querySelector(`[${FORMIDABLE_CSV.ATTRIBUTE}="${colChar}${row + 1}"]:checked`)
-                            content = checked ? checked.nextSibling.data.replace('\n', '') : ''
+                            content = checked ? checked.nextSibling.data.trim() : ''
                             break
                         default:
                             content = element.value

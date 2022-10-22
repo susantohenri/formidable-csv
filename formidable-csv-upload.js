@@ -28,7 +28,7 @@ document.getElementById('formidable-csv-upload-button').addEventListener('change
                         switch (element.getAttribute('type')) {
                             case 'radio':
                                 for (var radio of document.querySelectorAll(`[${FORMIDABLE_CSV.ATTRIBUTE}="${colChar}${rowNum}"]`)) {
-                                    if (`\n${content}` == radio.nextSibling.data) radio.checked = true
+                                    if (content == radio.nextSibling.data.trim()) radio.checked = true
                                     else radio.checked = false
                                 }
                                 break
