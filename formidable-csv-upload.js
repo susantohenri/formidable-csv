@@ -43,7 +43,7 @@ document.getElementById('formidable-csv-upload-button').addEventListener('change
                                     break
                             }
                     }
-                    element.dispatchEvent(triggerChange)
+                    jQuery(element).change()
                 }
             }
         }
