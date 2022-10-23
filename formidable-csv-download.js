@@ -30,6 +30,7 @@ function formidable_csv_download() {
                     content = element.childNodes[0].nodeValue
                     break
                 case 'SELECT':
+                    // content = element.options[element.selectedIndex].text OPTION.TEXT
                     content = element.value
                     break
                 case 'INPUT':
