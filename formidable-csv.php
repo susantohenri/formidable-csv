@@ -22,6 +22,7 @@
 
 define('FORMIDABLE_CSV_DELIMITER', ',');
 define('FORMIDABLE_CSV_ATTRIBUTE', 'data-csv');
+define('FORMIDABLE_CSV_READER_ATTRIBUTE', 'data-csv-url');
 
 add_shortcode('formidable-csv-upload-button', function () {
     wp_register_script('formidable-csv-upload', plugin_dir_url(__FILE__) . 'formidable-csv-upload.js');
@@ -30,8 +31,7 @@ add_shortcode('formidable-csv-upload-button', function () {
         'formidable-csv-upload',
         'FORMIDABLE_CSV',
         array(
-            'DELIMITER' => FORMIDABLE_CSV_DELIMITER
-            , 'ATTRIBUTE' => FORMIDABLE_CSV_ATTRIBUTE
+            'DELIMITER' => FORMIDABLE_CSV_DELIMITER, 'ATTRIBUTE' => FORMIDABLE_CSV_ATTRIBUTE
         )
     );
     return '<input type="file" id="formidable-csv-upload-button">';
@@ -47,12 +47,35 @@ add_shortcode('formidable-csv-download-button', function ($atts) {
         'formidable-csv-download',
         'FORMIDABLE_CSV',
         array(
-            'DELIMITER' => FORMIDABLE_CSV_DELIMITER
-            , 'ATTRIBUTE' => FORMIDABLE_CSV_ATTRIBUTE
-            , 'FILE_NAME' => $atts['file-name']
+            'DELIMITER' => FORMIDABLE_CSV_DELIMITER, 'ATTRIBUTE' => FORMIDABLE_CSV_ATTRIBUTE, 'FILE_NAME' => $atts['file-name']
         )
     );
     return
         '<table id="formidable-csv-download" style="display:none"></table>'
         . '<button onclick="formidable_csv_download(); return false;"> Download CSV </button>';
+});
+
+add_shortcode('formidable-csv-reader-popup', function () {
+    $test = '';
+    $FORMIDABLE_CSV_READER_ATTRIBUTE = FORMIDABLE_CSV_READER_ATTRIBUTE;
+
+    wp_register_style('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.css');
+    wp_enqueue_style('formidable-csv-reader-popup');
+
+    wp_register_script('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.js');
+    wp_enqueue_script('formidable-csv-reader-popup');
+    wp_enqueue_script('formidable-csv-reader-popup');
+    wp_localize_script(
+        'formidable-csv-reader-popup',
+        'FORMIDABLE_CSV',
+        array(
+            'DELIMITER' => FORMIDABLE_CSV_DELIMITER, 'READER_ATTRIBUTE' => FORMIDABLE_CSV_READER_ATTRIBUTE
+        )
+    );
+
+    return "
+    <div id='formidable-csv-reader-popup'>
+        <table></table>
+        <a onclick='javascript:document.getElementById(`formidable-csv-reader-popup`).style.display=`none`'>Close</a>
+    </div>";
 });

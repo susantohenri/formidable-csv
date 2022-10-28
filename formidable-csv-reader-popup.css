@@ -1,0 +1,40 @@
+#formidable-csv-reader-popup {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 30%;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+    background-color: #FFF;
+    padding: 25px;
+}
+
+#formidable-csv-reader-popup table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#formidable-csv-reader-popup table td,
+#formidable-csv-reader-popup table th {
+    min-width: 50px;
+    height: 15px;
+    border: 1px solid #ddd;
+    padding: 4px;
+}
+
+#formidable-csv-reader-popup table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#formidable-csv-reader-popup table tr:hover {
+    background-color: #ddd;
+}
+
+#formidable-csv-reader-popup table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
