@@ -1,4 +1,5 @@
 jQuery(() => {
+    jQuery('#formidable-csv-reader-popup').popup()
     jQuery(`[${FORMIDABLE_CSV.READER_ATTRIBUTE}]`).click(function () {
         var url = jQuery(this).attr(FORMIDABLE_CSV.READER_ATTRIBUTE)
             , popup = jQuery(`[id='formidable-csv-reader-popup']`)
@@ -27,7 +28,7 @@ jQuery(() => {
             }
 
             popup.find('table').html(tbody)
-            popup.css('display', 'block')
+            jQuery('#formidable-csv-reader-popup').popup('show')
         })
     })
 })

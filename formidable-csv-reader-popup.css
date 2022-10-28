@@ -1,16 +1,15 @@
 #formidable-csv-reader-popup {
-    display: none;
-    position: fixed;
-    top: 20%;
-    left: 30%;
     border: 3px solid #f1f1f1;
-    z-index: 9;
     background-color: #FFF;
     padding: 25px;
+    width: 90%;
+    max-height: 75%;
+    overflow-y: auto;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
 }
 
 #formidable-csv-reader-popup table {
-    font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }

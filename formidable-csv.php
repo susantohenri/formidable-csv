@@ -62,6 +62,9 @@ add_shortcode('formidable-csv-reader-popup', function () {
     wp_register_style('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.css');
     wp_enqueue_style('formidable-csv-reader-popup');
 
+    wp_register_script('jquery.popupoverlay', 'https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js');
+    wp_enqueue_script('jquery.popupoverlay');
+
     wp_register_script('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.js');
     wp_enqueue_script('formidable-csv-reader-popup');
     wp_enqueue_script('formidable-csv-reader-popup');
@@ -76,6 +79,5 @@ add_shortcode('formidable-csv-reader-popup', function () {
     return "
     <div id='formidable-csv-reader-popup'>
         <table></table>
-        <a onclick='javascript:document.getElementById(`formidable-csv-reader-popup`).style.display=`none`'>Close</a>
     </div>";
 });
