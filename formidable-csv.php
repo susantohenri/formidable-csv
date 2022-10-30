@@ -64,10 +64,10 @@ add_shortcode('formidable-csv-reader-popup', function () {
     wp_register_script('jquerymodal', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js');
     wp_enqueue_script('jquerymodal');
 
-    wp_register_style('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.css');
+    wp_register_style('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.css?cache-breaker=' . time());
     wp_enqueue_style('formidable-csv-reader-popup');
 
-    wp_register_script('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.js');
+    wp_register_script('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.js?cache-breaker=' . time());
     wp_enqueue_script('formidable-csv-reader-popup');
     wp_localize_script(
         'formidable-csv-reader-popup',
@@ -78,11 +78,6 @@ add_shortcode('formidable-csv-reader-popup', function () {
     );
 
     return "
-    <ul>
-        <li data-csv-url='https://localhost/wordpress/wp-content/uploads/formidable/58/Rbundle-RFP-Tax-Federal-IRS-Audit-Monitoring-3.csv'>Rbundle-RFP-Tax-Federal-IRS-Audit-Monitoring-3.csv</li>
-        <li data-csv-url='https://localhost/wordpress/wp-content/uploads/formidable/58/Rbundle-RFP-Tax-Federal-IRS-Audit-Monitoring-4.csv'>Rbundle-RFP-Tax-Federal-IRS-Audit-Monitoring-4.csv</li>
-        <li data-csv-url='https://localhost/wordpress/wp-content/uploads/formidable/58/Rbundle-RFP-Tax-Federal-IRS-Audit-Monitoring-5.csv'>Rbundle-RFP-Tax-Federal-IRS-Audit-Monitoring-5.csv</li>
-    </ul>
     <div id='formidable-csv-reader-popup'>
         <table></table>
     </div>";
