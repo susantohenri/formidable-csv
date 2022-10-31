@@ -27,7 +27,6 @@ jQuery(() => {
             }
 
             popup.find('table').html(tbody)
-            jQuery('#formidable-csv-reader-popup').modal()
         })
     })
 })

@@ -1,8 +1,5 @@
-#formidable-csv-reader-popup {
-    display: none;
-	top: 10%;
-	overflow: visible;
-    max-width: 90%;
+#formidable-csv-reader-popup .modal-dialog {
+    width: 90%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
 }

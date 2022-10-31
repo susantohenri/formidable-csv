@@ -58,11 +58,11 @@ add_shortcode('formidable-csv-download-button', function ($atts) {
 add_shortcode('formidable-csv-reader-popup', function () {
     $FORMIDABLE_CSV_READER_ATTRIBUTE = FORMIDABLE_CSV_READER_ATTRIBUTE;
 
-    wp_register_style('jquerymodal', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css');
-    wp_enqueue_style('jquerymodal');
+    wp_register_style('bootstrap', 'https://cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css');
+    wp_enqueue_style('bootstrap');
 
-    wp_register_script('jquerymodal', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js');
-    wp_enqueue_script('jquerymodal');
+    wp_register_script('bootstrap', 'https://cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js');
+    wp_enqueue_script('bootstrap');
 
     wp_register_style('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.css?cache-breaker=' . time());
     wp_enqueue_style('formidable-csv-reader-popup');
@@ -78,7 +78,29 @@ add_shortcode('formidable-csv-reader-popup', function () {
     );
 
     return "
-    <div id='formidable-csv-reader-popup'>
-        <table></table>
-    </div>";
+    <ul>
+        <li data-toggle='modal' data-target='#formidable-csv-reader-popup' data-csv-url='https://localhost/wordpress/wp-content/uploads/formidable/58/Rbundle-RFP-Tax-Federal-IRS-Audit-Monitoring-3.csv'>Rbundle-RFP-Tax-Federal-IRS-Audit-Monitoring-3.csv</li>
+        <li data-toggle='modal' data-target='#formidable-csv-reader-popup' data-csv-url='https://localhost/wordpress/wp-content/uploads/formidable/58/Rbundle-RFP-Tax-Federal-IRS-Audit-Monitoring-4.csv'>Rbundle-RFP-Tax-Federal-IRS-Audit-Monitoring-4.csv</li>
+        <li data-toggle='modal' data-target='#formidable-csv-reader-popup' data-csv-url='https://localhost/wordpress/wp-content/uploads/formidable/58/Rbundle-RFP-Tax-Federal-IRS-Audit-Monitoring-5.csv'>Rbundle-RFP-Tax-Federal-IRS-Audit-Monitoring-5.csv</li>
+    </ul>
+
+    <div id='formidable-csv-reader-popup' class='modal fade' role='dialog'>
+        <div class='modal-dialog'>
+
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                    <h4 class='modal-title'>Modal Header</h4>
+                </div>
+                <div class='modal-body'>
+                    <table></table>
+                </div>
+                <div class='modal-footer'>
+                    <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    ";
 });
