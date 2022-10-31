@@ -1,3 +1,7 @@
+a[data-csv-url] {
+	cursor: pointer;
+}
+
 #formidable-csv-reader-popup .modal-dialog {
     width: 90%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
