@@ -73,3 +73,8 @@ add_shortcode('formidable-csv-reader-popup', function () {
 
     return "";
 });
+
+add_shortcode('formidable-csv-force-download', function () {
+    wp_register_script('formidable-csv-force-download', plugin_dir_url(__FILE__) . 'formidable-csv-force-download.js');
+    wp_enqueue_script('formidable-csv-force-download');
+});
