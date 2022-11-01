@@ -1,24 +1,24 @@
-jQuery(() => {
-	jQuery('body').append(`
-		<div id='formidable-csv-reader-popup' class='modal fade' role='dialog'>
-			<div class='modal-dialog'>
+jQuery('body').prepend(`
+	<div id='formidable-csv-reader-popup' class='modal fade' role='dialog'>
+		<div class='modal-dialog'>
 
-				<div class='modal-content'>
-					<div class='modal-header'>
-						<button type='button' class='close' data-dismiss='modal'>&times;</button>
-						<h4 class='modal-title'>${FORMIDABLE_CSV.MODAL_HEADER}</h4>
-					</div>
-					<div class='modal-body'>
-						<table></table>
-					</div>
-					<div class='modal-footer'>
-						<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-					</div>
+			<div class='modal-content'>
+				<div class='modal-header'>
+					<button type='button' class='close' data-dismiss='modal'>&times;</button>
+					<h4 class='modal-title'>${FORMIDABLE_CSV.MODAL_HEADER}</h4>
 				</div>
-
+				<div class='modal-body'>
+					<table></table>
+				</div>
+				<div class='modal-footer'>
+					<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+				</div>
 			</div>
+
 		</div>
-	`)
+	</div>
+`)
+jQuery(() => {
     jQuery(`[${FORMIDABLE_CSV.READER_ATTRIBUTE}]`).click(function () {
         var url = jQuery(this).attr(FORMIDABLE_CSV.READER_ATTRIBUTE)
             , popup = jQuery(`[id='formidable-csv-reader-popup']`)
@@ -47,6 +47,7 @@ jQuery(() => {
             }
 
             popup.find('table').html(tbody)
+            popup.modal('show')
         })
     })
 })
