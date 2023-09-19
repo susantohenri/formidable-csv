@@ -1,6 +1,6 @@
 jQuery(function () {
-    jQuery('a[href$=".csv"]').click(function (event) {
-		event.preventDefault()
+    jQuery('a[href$=".csv"]').click(function (e) {
+        e.preventDefault()
         var href = jQuery(this).attr('href')
             , filename = href.split('/')[href.split('/').length - 1]
         jQuery.get(href, function (csv) {

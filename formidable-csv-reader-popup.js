@@ -47,7 +47,7 @@ jQuery(() => {
             }
 
             popup.find('table').html(tbody)
-			popup.modal('show')
+            popup.modal('show')
         })
     })
 })
