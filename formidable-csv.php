@@ -24,9 +24,20 @@ define('FORMIDABLE_CSV_DELIMITER', ',');
 define('FORMIDABLE_CSV_ATTRIBUTE', 'data-csv');
 define('FORMIDABLE_CSV_READER_ATTRIBUTE', 'data-csv-url');
 
-add_shortcode('formidable-csv-upload-button', function () {
-    wp_register_script('formidable-csv-upload', plugin_dir_url(__FILE__) . 'formidable-csv-upload.js');
-    wp_enqueue_script('formidable-csv-upload');
+function formidable_csv_register_scripts()
+{
+    wp_register_script('formidable-csv-upload-v1', plugin_dir_url(__FILE__) . 'formidable-csv-upload-v1.js', []);
+    wp_register_script('formidable-csv-download-v1', plugin_dir_url(__FILE__) . 'formidable-csv-download-v1.js', []);
+    wp_register_script('formidable-csv-upload-v2', plugin_dir_url(__FILE__) . 'formidable-csv-upload-v2.js', []);
+    wp_register_script('formidable-csv-download-v2', plugin_dir_url(__FILE__) . 'formidable-csv-download-v2.js', []);
+}
+add_action('wp_enqueue_scripts', 'formidable_csv_register_scripts');
+
+add_shortcode('formidable-csv-upload-button', function ($atts) {
+    $atts = shortcode_atts([
+        'version' => '1'
+    ], $atts);
+    wp_enqueue_script('formidable-csv-upload-v' . $atts['version']);
     wp_localize_script(
         'formidable-csv-upload',
         'FORMIDABLE_CSV',
@@ -34,15 +45,17 @@ add_shortcode('formidable-csv-upload-button', function () {
             'DELIMITER' => FORMIDABLE_CSV_DELIMITER, 'ATTRIBUTE' => FORMIDABLE_CSV_ATTRIBUTE
         )
     );
-    return '<input type="file" id="formidable-csv-upload-button">';
+    return '<input type="file" accept=".csv" id="formidable-csv-upload-button">';
 });
 
 add_shortcode('formidable-csv-download-button', function ($atts) {
-    $atts = shortcode_atts(['file-name' => 'Formidable CSV Default File Name.csv'], $atts);
+    $atts = shortcode_atts([
+        'file-name' => 'Formidable CSV Default File Name.csv',
+        'version' => '1'
+    ], $atts);
     $atts['file-name'] .= '.csv' !== substr($atts['file-name'], -4) ? '.csv' : '';
 
-    wp_register_script('formidable-csv-download', plugin_dir_url(__FILE__) . 'formidable-csv-download.js');
-    wp_enqueue_script('formidable-csv-download');
+    wp_enqueue_script('formidable-csv-download-v' . $atts['version']);
     wp_localize_script(
         'formidable-csv-download',
         'FORMIDABLE_CSV',
@@ -52,7 +65,7 @@ add_shortcode('formidable-csv-download-button', function ($atts) {
     );
     return
         '<table id="formidable-csv-download" style="display:none"></table>'
-        . '<button onclick="formidable_csv_download(); return false;"> Download CSV </button>';
+        . '<button class="btn btn-default" onclick="formidable_csv_download(); return false;">Save Progress</button>';
 });
 
 add_shortcode('formidable-csv-reader-popup', function ($atts) {
@@ -62,10 +75,10 @@ add_shortcode('formidable-csv-reader-popup', function ($atts) {
     wp_register_style('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.css?cache-breaker=' . time());
     wp_enqueue_style('formidable-csv-reader-popup');
 
-	wp_register_script('bootstrap', 'https://cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js');
+    wp_register_script('bootstrap', 'https://cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js');
     wp_enqueue_script('bootstrap');
 
-	wp_register_script('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.js?cache-breaker=' . time());
+    wp_register_script('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.js?cache-breaker=' . time());
     wp_enqueue_script('formidable-csv-reader-popup');
     wp_localize_script(
         'formidable-csv-reader-popup',

@@ -25,6 +25,9 @@ document.getElementById('formidable-csv-upload-button').addEventListener('change
 
                 if (element) {
                     switch (element.tagName) {
+						case 'TEXTAREA':
+							element.value = content
+							break
                         case 'SELECT':
                             for (var option of element.querySelectorAll('option')) {
                                 // if (content === option.text) option.setAttribute('selected', true) // BY TEXT

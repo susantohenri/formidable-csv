@@ -24,6 +24,7 @@ function formidable_csv_download() {
                 , element = document.querySelector(`[${FORMIDABLE_CSV.ATTRIBUTE}="${colChar}${row + 1}"]`)
                 , content = ''
             if (element) switch (element.tagName) {
+				case 'TEXTAREA':
                 case 'SELECT':
                     // content = element.options[element.selectedIndex].text OPTION.TEXT
                     content = element.value
