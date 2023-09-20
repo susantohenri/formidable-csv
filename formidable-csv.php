@@ -26,13 +26,18 @@ define('FORMIDABLE_CSV_READER_ATTRIBUTE', 'data-csv-url');
 
 function formidable_csv_register_scripts()
 {
-    wp_register_script('formidable-csv-upload', plugin_dir_url(__FILE__) . 'formidable-csv-upload.js', []);
-    wp_register_script('formidable-csv-download', plugin_dir_url(__FILE__) . 'formidable-csv-download.js', []);
+    wp_register_script('formidable-csv-upload-v1', plugin_dir_url(__FILE__) . 'formidable-csv-upload-v1.js', []);
+    wp_register_script('formidable-csv-download-v1', plugin_dir_url(__FILE__) . 'formidable-csv-download-v1.js', []);
+    wp_register_script('formidable-csv-upload-v2', plugin_dir_url(__FILE__) . 'formidable-csv-upload-v2.js', []);
+    wp_register_script('formidable-csv-download-v2', plugin_dir_url(__FILE__) . 'formidable-csv-download-v2.js', []);
 }
 add_action('wp_enqueue_scripts', 'formidable_csv_register_scripts');
 
-add_shortcode('formidable-csv-upload-button', function () {
-    wp_enqueue_script('formidable-csv-upload');
+add_shortcode('formidable-csv-upload-button', function ($atts) {
+    $atts = shortcode_atts([
+        'version' => '1'
+    ], $atts);
+    wp_enqueue_script('formidable-csv-upload-v' . $atts['version']);
     wp_localize_script(
         'formidable-csv-upload',
         'FORMIDABLE_CSV',
@@ -44,12 +49,13 @@ add_shortcode('formidable-csv-upload-button', function () {
 });
 
 add_shortcode('formidable-csv-download-button', function ($atts) {
-    $atts = shortcode_atts(['file-name' => 'Formidable CSV Default File Name.csv', 'new-js' => 'no'], $atts);
+    $atts = shortcode_atts([
+        'file-name' => 'Formidable CSV Default File Name.csv',
+        'version' => '1'
+    ], $atts);
     $atts['file-name'] .= '.csv' !== substr($atts['file-name'], -4) ? '.csv' : '';
 
-    // $file = $atts['new-js'] === 'yes' ? 'formidable-csv-download-new.js' : 'formidable-csv-download.js';
-
-    wp_enqueue_script('formidable-csv-download');
+    wp_enqueue_script('formidable-csv-download-v' . $atts['version']);
     wp_localize_script(
         'formidable-csv-download',
         'FORMIDABLE_CSV',
