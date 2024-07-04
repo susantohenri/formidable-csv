@@ -75,7 +75,7 @@ add_shortcode('formidable-csv-reader-popup', function ($atts) {
     wp_register_style('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.css?cache-breaker=' . time());
     wp_enqueue_style('formidable-csv-reader-popup');
 
-    wp_register_script('bootstrap', 'https://cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js');
+    wp_register_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js');
     wp_enqueue_script('bootstrap');
 
     wp_register_script('formidable-csv-reader-popup', plugin_dir_url(__FILE__) . 'formidable-csv-reader-popup.js?cache-breaker=' . time());
